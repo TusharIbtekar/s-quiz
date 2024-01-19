@@ -1,9 +1,9 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import NotFound from "./not-found";
-import Home from "./components/Home";
-import SignUp from "./components/SignUp";
-import SignIn from "./components/SignIn";
-import Admin from "./components/Admin";
+import Home from "./pages/Home";
+import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
+import Admin from "./pages/Admin";
 
 function App() {
   return (
