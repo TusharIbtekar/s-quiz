@@ -6,43 +6,23 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { quizDetails } from "@/utils/helper";
-import { useEffect, useState } from "react";
+import { Quiz, useQuizStore } from "@/stores/quiz";
+import { useResultStore } from "@/stores/result";
 import { useNavigate } from "react-router-dom";
 
-interface iQuiz {
-  id: number;
-  title: string;
-  duration: number;
-  description: string;
-  questions: Question[];
-}
-interface Question {
-  id: string;
-  question: string;
-  options: Option[];
-}
-interface Option {
-  label: string;
-  correctAnswer?: boolean;
-}
-
 export default function Home() {
-  const [quizData, setQuizData] = useState<iQuiz[]>([]);
   const navigate = useNavigate();
-  console.log(quizData);
+  const quizes = useQuizStore((state) => state.quizes);
+  const startQuiz = useResultStore((state) => state.startQuiz);
 
-  function handleStartQuiz(questions: Question[]) {
-    navigate("/quiz", { state: { questions } });
+  function handleStartQuiz(id: string) {
+    startQuiz("1", quizes.find((quiz) => quiz.id === id) as Quiz);
+    navigate(`/quiz/${id}`);
   }
-
-  useEffect(() => {
-    setQuizData(quizDetails);
-  }, []);
 
   return (
     <>
-      {quizData.map((quiz, index) => (
+      {quizes.map((quiz, index) => (
         <Card key={index} className="mt-5">
           <CardHeader>
             <CardTitle>{quiz.title}</CardTitle>
@@ -50,9 +30,7 @@ export default function Home() {
           </CardHeader>
           <CardFooter className="flex justify-between">
             <p>Duration: {quiz.duration} minutes</p>
-            <Button onClick={() => handleStartQuiz(quiz.questions)}>
-              Start
-            </Button>
+            <Button onClick={() => handleStartQuiz(quiz.id)}>Start</Button>
           </CardFooter>
         </Card>
       ))}
