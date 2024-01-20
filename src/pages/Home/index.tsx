@@ -23,11 +23,8 @@ interface Question {
   options: Option[];
 }
 interface Option {
-  option1: string;
-  option2: string;
-  option3: string;
-  option4: string;
-  correctAnswer: string;
+  label: string;
+  correctAnswer?: boolean;
 }
 
 export default function Home() {

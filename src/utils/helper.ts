@@ -10,14 +10,13 @@ export const quizDetails = [
         id: "q1",
         question: "What is the purpose of the HTML 'head' element?",
         options: [
+          { label: "To define the main content of the HTML document" },
           {
-            option1: "To define the main content of the HTML document",
-            option2: "To specify the title, metadata, and linked stylesheets",
-            option3: "To create a horizontal line in the document",
-            option4: "To define a section containing navigation links",
-            correctAnswer:
-              "To specify the title, metadata, and linked stylesheets",
+            label: "To specify the title, metadata, and linked stylesheets",
+            correctAnswer: true,
           },
+          { label: "To create a horizontal line in the document" },
+          { label: "To define a section containing navigation links" },
         ],
       },
       {
@@ -25,52 +24,46 @@ export const quizDetails = [
         question:
           "Which of the following is a valid way to declare a JavaScript variable?",
         options: [
-          {
-            option1: "var myVariable = 10;",
-            option2: "variable myVariable = 10;",
-            option3: "let myVariable = 10;",
-            option4: "const myVariable = 10;",
-            correctAnswer: "const myVariable = 10;",
-          },
+          { label: "var myVariable = 10;" },
+          { label: "variable myVariable = 10;" },
+          { label: "let myVariable = 10;" },
+          { label: "const myVariable = 10;", correctAnswer: true },
         ],
       },
       {
         id: "q3",
         question: "What does the CSS property 'display: none;' do?",
         options: [
-          {
-            option1: "Makes the element visible",
-            option2: "Hides the element",
-            option3: "Changes the font size of the element",
-            option4: "Adds a border around the element",
-            correctAnswer: "Hides the element",
-          },
+          { label: "Makes the element visible" },
+          { label: "Hides the element", correctAnswer: true },
+          { label: "Changes the font size of the element" },
+          { label: "Adds a border around the element" },
         ],
       },
       {
         id: "q4",
         question: "In React, what is the purpose of the 'useState' hook?",
         options: [
+          { label: "To fetch data from an API" },
           {
-            option1: "To fetch data from an API",
-            option2: "To manage state in a functional component",
-            option3: "To define a new component",
-            option4: "To handle routing in a React application",
-            correctAnswer: "To manage state in a functional component",
+            label: "To manage state in a functional component",
+            correctAnswer: true,
           },
+          { label: "To define a new component" },
+          { label: "To handle routing in a React application" },
         ],
       },
       {
         id: "q5",
         question: "What is the purpose of the 'SQL' language?",
         options: [
+          { label: "To style web pages" },
           {
-            option1: "To style web pages",
-            option2: "To query and manipulate relational databases",
-            option3: "To create interactive user interfaces",
-            option4: "To define the structure of an HTML document",
-            correctAnswer: "To query and manipulate relational databases",
+            label: "To query and manipulate relational databases",
+            correctAnswer: true,
           },
+          { label: "To create interactive user interfaces" },
+          { label: "To define the structure of an HTML document" },
         ],
       },
     ],
@@ -87,12 +80,12 @@ export const quizDetails = [
         question: "What is the purpose of the HTML 'doctype' declaration?",
         options: [
           {
-            option1: "Defines the document type and version of HTML",
-            option2: "Declares a new HTML element",
-            option3: "Specifies the color of the text",
-            option4: "Creates a link to an external stylesheet",
-            correctAnswer: "Defines the document type and version of HTML",
+            label: "Defines the document type and version of HTML",
+            correctAnswer: true,
           },
+          { label: "Declares a new HTML element" },
+          { label: "Specifies the color of the text" },
+          { label: "Creates a link to an external stylesheet" },
         ],
       },
       {
@@ -100,26 +93,23 @@ export const quizDetails = [
         question:
           "Which CSS property is used to set the background color of an element?",
         options: [
-          {
-            option1: "color",
-            option2: "background",
-            option3: "background-color",
-            option4: "text-color",
-            correctAnswer: "background-color",
-          },
+          { label: "color" },
+          { label: "background" },
+          { label: "background-color", correctAnswer: true },
+          { label: "text-color" },
         ],
       },
       {
         id: "q3",
         question: "What is the purpose of the JavaScript 'forEach' method?",
         options: [
+          { label: "To create a new array" },
           {
-            option1: "To create a new array",
-            option2: "To iterate over the elements of an array",
-            option3: "To filter array elements based on a condition",
-            option4: "To sort the elements of an array",
-            correctAnswer: "To iterate over the elements of an array",
+            label: "To iterate over the elements of an array",
+            correctAnswer: true,
           },
+          { label: "To filter array elements based on a condition" },
+          { label: "To sort the elements of an array" },
         ],
       },
       {
@@ -127,15 +117,14 @@ export const quizDetails = [
         question:
           "In React, what is the purpose of the 'componentDidMount' lifecycle method?",
         options: [
+          { label: "To update the component's state" },
+          { label: "To handle events triggered by user actions" },
           {
-            option1: "To update the component's state",
-            option2: "To handle events triggered by user actions",
-            option3:
+            label:
               "To perform actions after the component has been mounted to the DOM",
-            option4: "To define the component's initial state",
-            correctAnswer:
-              "To perform actions after the component has been mounted to the DOM",
+            correctAnswer: true,
           },
+          { label: "To define the component's initial state" },
         ],
       },
       {
@@ -144,12 +133,12 @@ export const quizDetails = [
           "What is the role of the 'DOCTYPE' declaration in an HTML document?",
         options: [
           {
-            option1: "It defines the document type and version of HTML",
-            option2: "It creates a new HTML element",
-            option3: "It specifies the color of the text",
-            option4: "It links to an external stylesheet",
-            correctAnswer: "It defines the document type and version of HTML",
+            label: "It defines the document type and version of HTML",
+            correctAnswer: true,
           },
+          { label: "It creates a new HTML element" },
+          { label: "It specifies the color of the text" },
+          { label: "It links to an external stylesheet" },
         ],
       },
     ],
