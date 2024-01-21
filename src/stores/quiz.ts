@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { mockQuizes } from "./mockQuiz";
+import { persist, devtools } from "zustand/middleware";
 
 export type Quiz = {
   id: string;
@@ -30,18 +31,25 @@ const initialState: State = {
   quizes: mockQuizes,
 };
 
-export const useQuizStore = create<State & Action>((set) => ({
-  ...initialState,
-  addQuiz: (quiz) =>
-    set((state) => ({
-      quizes: [...state.quizes, quiz],
-    })),
-  updateQuiz: (quiz) =>
-    set((state) => ({
-      quizes: state.quizes.map((q) => (q.id === quiz.id ? quiz : q)),
-    })),
-  deleteQuiz: (quiz) =>
-    set((state) => ({
-      quizes: state.quizes.filter((q) => q.id !== quiz.id),
-    })),
-}));
+export const useQuizStore = create<State & Action>()(
+  devtools(
+    persist(
+      (set) => ({
+        ...initialState,
+        addQuiz: (quiz) =>
+          set((state) => ({
+            quizes: [...state.quizes, quiz],
+          })),
+        updateQuiz: (quiz) =>
+          set((state) => ({
+            quizes: state.quizes.map((q) => (q.id === quiz.id ? quiz : q)),
+          })),
+        deleteQuiz: (quiz) =>
+          set((state) => ({
+            quizes: state.quizes.filter((q) => q.id !== quiz.id),
+          })),
+      }),
+      { name: "quiz-storage" }
+    )
+  )
+);
