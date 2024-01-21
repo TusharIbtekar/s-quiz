@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 type User = {
   id: string;
@@ -6,9 +7,12 @@ type User = {
   password: string;
   role: string;
 };
-type State = { users: User[] };
 
-type Action = {};
+type State = {
+  users: User[];
+  currentUser: User | null;
+};
+
 const initialState: State = {
   users: [
     {
@@ -24,8 +28,28 @@ const initialState: State = {
       password: "password",
     },
   ],
+  currentUser: null,
 };
 
-export const useUserStore = create<State & Action>(() => ({
-  ...initialState,
-}));
+type Action = {
+  // signIn: (email: string, password: string) => void;
+  signOut: () => void;
+  saveUser: (user: User) => void;
+};
+
+export const useAuthStore = create<State & Action>()(
+  persist(
+    (set) => ({
+      ...initialState,
+      saveUser: (user) => {
+        set({ currentUser: user });
+      },
+      signOut: () => {
+        set({ currentUser: null });
+      },
+    }),
+    {
+      name: "auth-storage",
+    }
+  )
+);
