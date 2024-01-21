@@ -2,7 +2,7 @@ import { BrowserRouter } from "react-router-dom";
 import { useAuthStore } from "./stores/user";
 import UserRoutes from "./routes/UserRoutes";
 import AdminRoutes from "./routes/AdminRoutes";
-import SignIn from "./pages/SignIn";
+import SignIn from "./pages/signin";
 
 function App() {
   const { currentUser } = useAuthStore();

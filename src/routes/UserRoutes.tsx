@@ -1,8 +1,8 @@
 import NotFoundPage from "@/components/notfound/NotFound";
-import Home from "@/pages/Home";
-import Quiz from "@/pages/Quiz";
-import Result from "@/pages/Result";
-import SignIn from "@/pages/SignIn";
+import Home from "@/pages/home";
+import Quiz from "@/pages/quiz";
+import Result from "@/pages/result";
+import SignIn from "@/pages/signin";
 import { Route, Routes } from "react-router-dom";
 
 function UserRoutes() {

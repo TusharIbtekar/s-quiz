@@ -1,7 +1,7 @@
 import NotFoundPage from "@/components/notfound/NotFound";
-import Admin from "@/pages/Admin";
-import CreateQuiz from "@/pages/CreateQuiz";
-import EditQuiz from "@/pages/EditQuiz";
+import Admin from "@/pages/admin";
+import CreateQuiz from "@/pages/quiz/create";
+import EditQuiz from "@/pages/quiz/edit";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 function AdminRoutes() {
