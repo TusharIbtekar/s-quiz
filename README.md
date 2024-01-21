@@ -1,30 +1,56 @@
-# React + TypeScript + Vite
+<h1><a href="https://quiz.ibtekar.dev" target="_blank">S-Quiz</a></h1>
+<p>Quiz Conducting Platform</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Guide
 
-Currently, two official plugins are available:
+User credentials:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```
+email: role@user.com
+password: password
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Admin credentials:
+
+```
+email: role@admin.com
+password: password
+```
+
+## Features
+
+### Admin
+
+- Login
+- Create quiz
+- Edit quiz
+- Add questions
+- Edit questions
+
+### General user
+
+- Login
+- Take quiz
+- Retake quiz
+- View Result (Can view previous answers)
+
+## Built with
+
+- **Framework**: React.js
+- **Bundler**: Vite
+- **State Management**: Zustand
+- **Validator**: Zod
+- **Form handling**: React Hook Form
+- **UI library**: shadcn/ui
+- **Styling**: TailwindCSS
+- **Deployment**: Vercel
+
+## Running Locally
+
+```sh
+git clone git@github.com:TusharIbtekar/s-quiz.git
+cd s-quiz && pnpm install
+pnpm run dev
+```
+
+The above commands will start the application on [http://localhost:5173/](http://localhost:5173)
