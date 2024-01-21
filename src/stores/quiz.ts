@@ -25,7 +25,7 @@ type State = { quizes: Quiz[] };
 type Action = {
   addQuiz: (quiz: Quiz) => void;
   updateQuiz: (quiz: Quiz) => void;
-  deleteQuiz: (quiz: Quiz) => void;
+  deleteQuiz: (quizId: string) => void;
 };
 const initialState: State = {
   quizes: mockQuizes,
@@ -44,9 +44,9 @@ export const useQuizStore = create<State & Action>()(
           set((state) => ({
             quizes: state.quizes.map((q) => (q.id === quiz.id ? quiz : q)),
           })),
-        deleteQuiz: (quiz) =>
+        deleteQuiz: (quizId) =>
           set((state) => ({
-            quizes: state.quizes.filter((q) => q.id !== quiz.id),
+            quizes: state.quizes.filter((q) => q.id !== quizId),
           })),
       }),
       { name: "quiz-storage" }

@@ -18,13 +18,6 @@ export default function Question({ quiz }: Props) {
     setCurrentIndex((prev) => prev + 1);
   };
 
-  const handlePreviousQuestion = () => {
-    if (currentIndex === 0) {
-      return;
-    }
-    setCurrentIndex((prev) => prev - 1);
-  };
-
   return (
     <div className="flex flex-col items-center justify-center w-full mt-4">
       <SingleQuestion
@@ -32,7 +25,6 @@ export default function Question({ quiz }: Props) {
         onNext={handleNextQuestion}
         isLast={currentIndex === questions.length - 1}
         quizId={quiz.id}
-        onPrevious={handlePreviousQuestion}
       />
     </div>
   );

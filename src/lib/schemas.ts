@@ -10,7 +10,7 @@ export const loginSchema = z.object({
 export const quizSchema = z.object({
   title: z.string().min(5, { message: "Title must be at least 3 characters" }),
   description: z.string().min(10, { message: "Description is too short" }),
-  duration: z
+  duration: z.coerce
     .number()
     .min(1, { message: "Duration must be at least 1 minute" }),
   questions: z.array(
@@ -18,14 +18,29 @@ export const quizSchema = z.object({
       title: z
         .string()
         .min(5, { message: "Title must be at least 5 characters" }),
-      options: z.array(
-        z.object({
+      options: z.object({
+        "0": z.object({
           label: z
             .string()
             .min(1, { message: "Option must be at least 1 character" }),
-          correctAnswer: z.boolean(),
-        })
-      ),
+        }),
+        "1": z.object({
+          label: z
+            .string()
+            .min(1, { message: "Option must be at least 1 character" }),
+        }),
+        "2": z.object({
+          label: z
+            .string()
+            .min(1, { message: "Option must be at least 1 character" }),
+        }),
+        "3": z.object({
+          label: z
+            .string()
+            .min(1, { message: "Option must be at least 1 character" }),
+        }),
+      }),
+      correctAnswer: z.string(),
     })
   ),
 });
