@@ -6,14 +6,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Quiz, useQuizStore } from "@/stores/quiz";
-import { useResultStore } from "@/stores/result";
+import { useQuizStore } from "@/stores/quiz";
 import { useNavigate } from "react-router-dom";
 
 export default function Admin() {
   const navigate = useNavigate();
   const quizes = useQuizStore((state) => state.quizes);
-  const deleteQuiz = useQuizStore((state) => state.deleteQuiz);
 
   return (
     <>

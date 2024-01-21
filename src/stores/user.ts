@@ -26,7 +26,6 @@ const initialState: State = {
   ],
 };
 
-// Create your store, which includes both User and (optionally) actions
-export const useUserStore = create<State & Action>((set) => ({
+export const useUserStore = create<State & Action>(() => ({
   ...initialState,
 }));
