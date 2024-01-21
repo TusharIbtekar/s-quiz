@@ -1,12 +1,11 @@
 import type { Question } from "@/stores/quiz";
 import { Button } from "../ui/button";
 import { useResultStore } from "@/stores/result";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   question: Question;
   onNext: () => void;
-  onPrevious: () => void;
   isLast: boolean;
   quizId: string;
 }
@@ -15,11 +14,16 @@ export default function SingleQuestion({
   isLast,
   quizId,
   onNext,
-  onPrevious,
 }: Props) {
   const addAnswer = useResultStore((state) => state.addAnswer);
   const [selectedOption, setSelectedOption] = useState<string>("");
+
+  useEffect(() => {
+    setSelectedOption("");
+  }, [question]);
+
   const handleNext = () => {
+    if (selectedOption === "") return;
     const isCorrect = question.options.find(
       (option) => option.id === selectedOption
     )?.correctAnswer as boolean;
@@ -35,44 +39,34 @@ export default function SingleQuestion({
       <div className="text-2xl text-center">{question.title}</div>
       <fieldset className="mt-4">
         <div className="space-y-4">
-          {question.options.map((question) => (
-            <div key={question.id} className="flex items-center">
+          {question.options.map((option) => (
+            <div key={option.id} className="flex items-center">
               <input
-                id={question.id.toString()}
-                // name={`${question.id}-selection`}
+                id={option.id.toString()}
                 name="question-selection"
                 type="radio"
                 onChange={(e) => handleOptionsSelect(e)}
                 className="h-4 w-4 border-gray-300 text-primary focus:ring-primary"
               />
               <label
-                htmlFor={question.id.toString()}
+                htmlFor={option.id.toString()}
                 className="ml-3 flex w-full justify-between leading-6 text-title"
               >
-                <span className="text-lg">{question.label}</span>
+                <span className="text-lg">{option.label}</span>
               </label>
             </div>
           ))}
         </div>
       </fieldset>
-      <div className="flex items-center p-6 pt-10 justify-between w-full">
-        <Button
-          variant="outline"
-          className="mt-2"
-          size="lg"
-          onClick={onPrevious}
-        >
-          Previous
-        </Button>{" "}
-        <Button
-          variant="default"
-          className="mt-2"
-          size="lg"
-          onClick={() => handleNext()}
-        >
-          {isLast ? "Finish" : "Next"}
-        </Button>
-      </div>
+      <Button
+        variant="default"
+        className="mt-2 ml-auto"
+        disabled={selectedOption === ""}
+        size="lg"
+        onClick={() => handleNext()}
+      >
+        {isLast ? "Finish" : "Next"}
+      </Button>
     </>
   );
 }
