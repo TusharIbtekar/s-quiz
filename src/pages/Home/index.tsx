@@ -8,20 +8,35 @@ import {
 } from "@/components/ui/card";
 import { Quiz, useQuizStore } from "@/stores/quiz";
 import { useResultStore } from "@/stores/result";
+import { useAuthStore } from "@/stores/user";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const navigate = useNavigate();
   const quizes = useQuizStore((state) => state.quizes);
   const startQuiz = useResultStore((state) => state.startQuiz);
+  const user = useAuthStore((state) => state.currentUser);
+  const signOut = useAuthStore((state) => state.signOut);
+  const results = useResultStore((state) => state.results[user!.id]);
 
   function handleStartQuiz(id: string) {
-    startQuiz("1", quizes.find((quiz) => quiz.id === id) as Quiz);
+    const previousAttempts = results?.find((result) => result.quizId === id);
+    if (!previousAttempts) {
+      startQuiz(user!.id, quizes.find((quiz) => quiz.id === id) as Quiz);
+    }
     navigate(`/quiz/${id}`);
   }
 
+  const handleSignOut = () => {
+    signOut();
+    navigate("/signin");
+  };
+
   return (
-    <>
+    <div>
+      <Button variant="ghost" onClick={handleSignOut}>
+        Sign out
+      </Button>
       {quizes.map((quiz, index) => (
         <Card key={index} className="mt-5">
           <CardHeader>
@@ -34,6 +49,6 @@ export default function Home() {
           </CardFooter>
         </Card>
       ))}
-    </>
+    </div>
   );
 }

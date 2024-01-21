@@ -24,9 +24,9 @@ export default function Result() {
       <p className="scroll-m-20 text-xl tracking-tight mt-5">
         You scored {score} out of {userResult?.total}
       </p>
-      {userResult?.answers.map((answer) => {
+      {userResult?.answers.map((answer, index) => {
         return (
-          <>
+          <div key={index + answer.question.id}>
             <Card key={answer.question.id} className="my-5">
               <CardHeader>
                 <CardTitle>{answer.question.title}</CardTitle>
@@ -56,7 +56,7 @@ export default function Result() {
                 )}
                 {answer.previousAnswers.map((previousAnswer, index) => {
                   return (
-                    <>
+                    <div key={index}>
                       {previousAnswer !== answer.currentAnswer && (
                         <p className="text-blue-500">
                           Previous Answer {index + 1} :{" "}
@@ -69,12 +69,12 @@ export default function Result() {
                           }
                         </p>
                       )}
-                    </>
+                    </div>
                   );
                 })}
               </CardContent>
             </Card>
-          </>
+          </div>
         );
       })}
       <Button className="mb-5" onClick={() => navigate("/")}>

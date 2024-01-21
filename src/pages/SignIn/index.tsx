@@ -13,11 +13,15 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "@/stores/user";
 
 type formData = z.infer<typeof loginSchema>;
 
-export default function SignUp() {
+export default function SignIn() {
+  const saveUser = useAuthStore((state) => state.saveUser);
+  const allUsers = useAuthStore((state) => state.users);
   const navigate = useNavigate();
+
   const form = useForm<formData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -25,10 +29,28 @@ export default function SignUp() {
       password: "",
     },
   });
+
+  const signInUser = (email: string, password: string) => {
+    const foundUser = allUsers.find(
+      (user) => user.email === email && user.password === password
+    );
+
+    if (foundUser) {
+      saveUser(foundUser);
+      foundUser.role === "user" ? navigate("/") : navigate("/admin");
+    } else {
+      form.setError("email", {
+        type: "manual",
+        message: "Email or password is incorrect",
+      });
+    }
+  };
+
   function onSubmit(values: formData) {
     console.log(values);
-    navigate("/");
+    signInUser(values.email, values.password);
   }
+
   return (
     <Form {...form}>
       <div className="mx-auto w-fit text-center">
