@@ -1,11 +1,13 @@
 import { useResultStore } from "@/stores/result";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Option } from "@/stores/quiz";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export default function Result() {
   const results = useResultStore((state) => state.results);
   const id = useParams().id;
+  const navigate = useNavigate();
   const userResults = results["1"];
   const userResult = userResults.find((result) => result.quizId === id);
   const score = userResult?.answers.reduce((acc, answer) => {
@@ -54,16 +56,20 @@ export default function Result() {
                 )}
                 {answer.previousAnswers.map((previousAnswer, index) => {
                   return (
-                    <p className="text-blue-500">
-                      Previous Answer {index + 1} :{" "}
-                      {
-                        (
-                          answer.question.options.find(
-                            (o) => o.id === previousAnswer
-                          ) as Option
-                        ).label
-                      }
-                    </p>
+                    <>
+                      {previousAnswer !== answer.currentAnswer && (
+                        <p className="text-blue-500">
+                          Previous Answer {index + 1} :{" "}
+                          {
+                            (
+                              answer.question.options.find(
+                                (o) => o.id === previousAnswer
+                              ) as Option
+                            ).label
+                          }
+                        </p>
+                      )}
+                    </>
                   );
                 })}
               </CardContent>
@@ -71,6 +77,9 @@ export default function Result() {
           </>
         );
       })}
+      <Button className="mb-5" onClick={() => navigate("/")}>
+        Return to Home
+      </Button>
     </>
   );
 }
