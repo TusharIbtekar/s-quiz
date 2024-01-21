@@ -1,21 +1,21 @@
 import type { Question } from "@/stores/quiz";
 import { Button } from "../ui/button";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Label } from "../ui/label";
 import { useResultStore } from "@/stores/result";
 import { useState } from "react";
 
 interface Props {
   question: Question;
   onNext: () => void;
+  onPrevious: () => void;
   isLast: boolean;
   quizId: string;
 }
 export default function SingleQuestion({
   question,
-  onNext,
   isLast,
   quizId,
+  onNext,
+  onPrevious,
 }: Props) {
   const addAnswer = useResultStore((state) => state.addAnswer);
   const [selectedOption, setSelectedOption] = useState<string>("");
@@ -39,7 +39,8 @@ export default function SingleQuestion({
             <div key={question.id} className="flex items-center">
               <input
                 id={question.id.toString()}
-                name={`${question.id}-selection`}
+                // name={`${question.id}-selection`}
+                name="question-selection"
                 type="radio"
                 onChange={(e) => handleOptionsSelect(e)}
                 className="h-4 w-4 border-gray-300 text-primary focus:ring-primary"
@@ -54,14 +55,24 @@ export default function SingleQuestion({
           ))}
         </div>
       </fieldset>
-      <Button
-        variant="default"
-        className="mt-2"
-        size="lg"
-        onClick={() => handleNext()}
-      >
-        {isLast ? "Finish" : "Next"}
-      </Button>
+      <div className="flex items-center p-6 pt-10 justify-between w-full">
+        <Button
+          variant="outline"
+          className="mt-2"
+          size="lg"
+          onClick={onPrevious}
+        >
+          Previous
+        </Button>{" "}
+        <Button
+          variant="default"
+          className="mt-2"
+          size="lg"
+          onClick={() => handleNext()}
+        >
+          {isLast ? "Finish" : "Next"}
+        </Button>
+      </div>
     </>
   );
 }
