@@ -1,24 +1,22 @@
-import { Route, Routes, BrowserRouter } from "react-router-dom";
-import NotFound from "./components/notfound/not-found";
+import { BrowserRouter } from "react-router-dom";
+import { useAuthStore } from "./stores/user";
+import UserRoutes from "./routes/UserRoutes";
+import AdminRoutes from "./routes/AdminRoutes";
 import SignIn from "./pages/SignIn";
-import Home from "./pages/Home";
-import Quiz from "./pages/Quiz";
-import Result from "./pages/Result";
-import Admin from "./pages/Admin";
-import CreateQuiz from "./pages/CreateQuiz";
 
 function App() {
+  const { currentUser } = useAuthStore();
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/quiz/:id" element={<Quiz />} />
-        <Route path="/result/:id" element={<Result />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/admin/create" element={<CreateQuiz />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      {currentUser ? (
+        currentUser.role === "admin" ? (
+          <AdminRoutes />
+        ) : (
+          <UserRoutes />
+        )
+      ) : (
+        <SignIn />
+      )}
     </BrowserRouter>
   );
 }
